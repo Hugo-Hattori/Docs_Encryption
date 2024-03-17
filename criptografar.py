@@ -1,9 +1,9 @@
 from cryptography.fernet import Fernet
 
 
-def criptografar(nome_arquivo):
+def criptografar(nome_arquivo, nome_arq_chave):
     # abrindo a chave
-    with open('arquivo_chave.key', 'rb') as arquivo_chave:
+    with open(nome_arq_chave, 'rb') as arquivo_chave:
         chave = arquivo_chave.read()
 
     # utilizando a chave gerada
@@ -22,5 +22,6 @@ def criptografar(nome_arquivo):
 
 
 if __name__ == '__main__':
-    nome_arquivo = input('Escreva o nome/caminho do arquivo: ')
-    criptografar(nome_arquivo)
+    nome_arquivo = input('Insira o nome/caminho do arquivo: ')
+    nome_arq_chave = input('Insira o nome do arquivo que contém a chave')
+    criptografar(nome_arquivo, nome_arq_chave)
