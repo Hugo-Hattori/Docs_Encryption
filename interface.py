@@ -16,7 +16,7 @@ def selecionar_arquivo():
 
 
 def selecionar_chave():
-    caminho_arquivo = askopenfilename(title="Selecione a chave que ira criptografar/descriptografar")
+    caminho_arquivo = askopenfilename(title="Selecione a chave que irá criptografar/descriptografar")
     var_caminhoarquivo.set(caminho_arquivo)
     if caminho_arquivo:
         caminho_arquivo = caminho_arquivo.split('/')[-1]

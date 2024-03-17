@@ -1,5 +1,5 @@
 from cryptography.fernet import Fernet
-
+import os
 
 def criptografar(nome_arquivo, nome_arq_chave):
     # abrindo a chave
@@ -16,9 +16,18 @@ def criptografar(nome_arquivo, nome_arq_chave):
     # criptografando arquivo
     encrypted = fernet.encrypt(original)
 
-    # sobrescrevendo dados criptografados
-    with open(nome_arquivo, 'wb') as arquivo_encrypted:
+    # salvando arquivo criptografado
+    id_unico = nome_arq_chave.split('_')[-1]
+    id_unico = id_unico.split('.')[-2]
+    nome_cortado = nome_arquivo.split('.')
+    parte1 = nome_cortado[-2]
+    parte2 = nome_cortado[-1]
+    with open(parte1 + '__' + id_unico + '.' + parte2, 'wb') as arquivo_encrypted:
         arquivo_encrypted.write(encrypted)
+
+    # deleta arquivo não criptografado
+    os.remove(nome_arquivo)
+
 
 
 if __name__ == '__main__':

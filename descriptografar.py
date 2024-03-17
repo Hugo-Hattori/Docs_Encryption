@@ -1,5 +1,5 @@
 from cryptography.fernet import Fernet
-
+import os
 
 def descriptografar(nome_arquivo, nome_arq_chave):
     # abrindo a chave
@@ -16,9 +16,16 @@ def descriptografar(nome_arquivo, nome_arq_chave):
     # descriptografar
     decrypted = fernet.decrypt(encrypted)
 
-    # sobreescrevendo arquivo descriptografado
-    with open(nome_arquivo, 'wb') as arquivo_decrypted:
+    # salva arquivo descriptografado
+    nome_cortado = nome_arquivo.split('__')
+    parte1 = nome_cortado[0]
+    parte2 = nome_cortado[1].split('.')[-1]
+    nome_original = parte1 + '.' + parte2
+    with open(nome_original, 'wb') as arquivo_decrypted:
         arquivo_decrypted.write(decrypted)
+
+    # deletado arquivo criptografado
+    os.remove(nome_arquivo)
 
 
 if __name__ == '__main__':
