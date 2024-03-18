@@ -16,19 +16,29 @@ def descriptografar(nome_arquivo, nome_arq_chave):
         with open(nome_arquivo, 'rb') as arquivo_encrypted:
             encrypted = arquivo_encrypted.read()
 
-        # descriptografar
-        decrypted = fernet.decrypt(encrypted)
-
-        # salva arquivo descriptografado
         nome_cortado = nome_arquivo.split('__')
         parte1 = nome_cortado[0]
         parte2 = nome_cortado[1].split('.')[-1]
         nome_original = parte1 + '.' + parte2
-        with open(nome_original, 'wb') as arquivo_decrypted:
-            arquivo_decrypted.write(decrypted)
 
-        # deletado arquivo criptografado
-        os.remove(nome_arquivo)
+        # comparando ids (medidad de segurança)
+        id_chave = nome_arq_chave.split('_')[-1]
+        id_chave = id_chave.split('.')[-2]
+        id_arq_criptografado = nome_cortado[1].split('.')[-2]
+
+        if id_chave == id_arq_criptografado:
+            # descriptografar
+            decrypted = fernet.decrypt(encrypted)
+
+            # salva arquivo descriptografado
+            with open(nome_original, 'wb') as arquivo_decrypted:
+                arquivo_decrypted.write(decrypted)
+
+            # deletado arquivo criptografado
+            os.remove(nome_arquivo)
+
+        else:
+            messagebox.showwarning(title='Alerta', message='Você está utilizando a chave errada!')
 
     except Exception as erro:
         print(erro)
