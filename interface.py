@@ -30,6 +30,8 @@ janela = tk.Tk()
 janela.title('Criptografia de Arquivos')
 
 var_caminhoarquivo = tk.StringVar()
+arquivo_selecionado = ''
+chave_selecionado = ''
 
 botao_selecionar_arquivo = tk.Button(text="Selecionar Arquivo", command=selecionar_arquivo)
 botao_selecionar_arquivo.grid(row=0, column=0, padx=10, pady=10, sticky='nsew')
@@ -43,13 +45,15 @@ botao_selecionar_chave.grid(row=1, column=0, padx=10, pady=10, sticky='nsew')
 label_chave_selecionada = tk.Label(text='Nenhum Arquivo Selecionado', anchor='e')
 label_chave_selecionada.grid(row=1, column=1, padx=10, pady=10, sticky='nsew')
 
-botao_gerar_chave = tk.Button(text="Criptografar", command=lambda: criptografar(nome_arquivo=arquivo_selecionado, nome_arq_chave=chave_selecionado))
-botao_gerar_chave.grid(row=3, column=0, padx=10, pady=10, sticky='nsew')
+botao_gerar_chave = tk.Button(text="Clique para gerar uma nova chave", command=gerar_chave)
+botao_gerar_chave.grid(row=2, column=0, padx=10, pady=10, sticky='nsew')
 
-botao_cryp = tk.Button(text="Descriptografar", command=lambda: descriptografar(nome_arquivo=arquivo_selecionado, nome_arq_chave=chave_selecionado))
-botao_cryp.grid(row=3, column=1, padx=10, pady=10, sticky='nsew')
+# Botão Criptografar
+botao_encryp = tk.Button(text="Criptografar", command=lambda: criptografar(nome_arquivo=arquivo_selecionado, nome_arq_chave=chave_selecionado))
+botao_encryp.grid(row=3, column=0, padx=10, pady=10, sticky='nsew')
 
-botao_decryp = tk.Button(text="Clique para gerar uma nova chave", command=gerar_chave)
-botao_decryp.grid(row=2, column=0, padx=10, pady=10, sticky='nsew')
+# Botão Descriptografar
+botao_decryp = tk.Button(text="Descriptografar", command=lambda: descriptografar(nome_arquivo=arquivo_selecionado, nome_arq_chave=chave_selecionado))
+botao_decryp.grid(row=3, column=1, padx=10, pady=10, sticky='nsew')
 
 janela.mainloop()
