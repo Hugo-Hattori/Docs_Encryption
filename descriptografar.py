@@ -12,7 +12,7 @@ def descriptografar(nome_arquivo, nome_arq_chave):
         # utilizando a chave gerada
         fernet = Fernet(chave)
 
-        # abrir arquivo criptografado
+        # abrindo arquivo criptografado
         with open(nome_arquivo, 'rb') as arquivo_encrypted:
             encrypted = arquivo_encrypted.read()
 
@@ -21,20 +21,20 @@ def descriptografar(nome_arquivo, nome_arq_chave):
         parte2 = nome_cortado[1].split('.')[-1]
         nome_original = parte1 + '.' + parte2
 
-        # comparando ids (medidad de segurança)
+        # pegando ids para comparação (medida de segurança)
         id_chave = nome_arq_chave.split('_')[-1]
         id_chave = id_chave.split('.')[-2]
         id_arq_criptografado = nome_cortado[1].split('.')[-2]
 
         if id_chave == id_arq_criptografado:
-            # descriptografar
+            # descriptografando arquivo
             decrypted = fernet.decrypt(encrypted)
 
-            # salva arquivo descriptografado
+            # salvando arquivo descriptografado
             with open(nome_original, 'wb') as arquivo_decrypted:
                 arquivo_decrypted.write(decrypted)
 
-            # deletado arquivo criptografado
+            # deletando arquivo criptografado
             os.remove(nome_arquivo)
 
         else:
