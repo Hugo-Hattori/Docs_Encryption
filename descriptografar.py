@@ -36,12 +36,12 @@ def descriptografar(nome_arquivo, nome_arq_chave):
 
             # deletando arquivo criptografado
             os.remove(nome_arquivo)
+            messagebox.showinfo(title='Sucesso!', message='O arquivo foi descriptografado com sucesso!')
 
         else:
             messagebox.showwarning(title='Alerta', message='Você está utilizando a chave errada!')
 
     except Exception as erro:
-        print(erro)
         messagebox.showerror(title='Erro', message=erro)
 
 
