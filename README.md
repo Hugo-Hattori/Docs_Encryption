@@ -30,7 +30,7 @@ impossible to encrypt/decrypt files as such the generated key must never be dele
 
 ## Interface
 
-<p>"interface.py" is the python scrypt that contains the user interface and is responsible for
+<p>"interface.py" is the python script that contains the user interface and is responsible for
 connecting "gerador_chave.py", "criptografar.py" and "descriptografar.py" together. The interface
 is simple but very effective, it displays both "success" and "error" messages.</p>
 
